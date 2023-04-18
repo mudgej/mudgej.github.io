@@ -1,0 +1,64 @@
+<html>
+<head><title>SSAC Gas Calculator</title></head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<body>
+<h1>Nitrox Bank / Compressor Calculator</h1>
+
+This calculator is for blending mixes using a low o2% blending gas (fill mix), for example blending using a nitrox compressor, or banked nitrox.
+<br />
+<br />
+Using this method, the maximum o2% that can be achieved in the final / desired mix is the o2% of the fill mix gas.
+<br />
+<br />
+As the SSAC nitrox bank is 34%, the primary purpose of this calculator is to work out the quantity of 34% and and air that should be added to acheive a mix other than 34%. However, as the compressor can provide ~38%, other fill mixes can be specified.
+<br />
+<br />
+Start Pressure: <input type="text" id="n1">
+<br />
+End Pressure: <input type="text" id="n2">
+<br />
+Start Mix: <input type="text" id="n3">
+<br />
+Desired (End) Mix: <input type="text" id="n4">
+<br />
+Fill Mix % (Nitrox or Bank): <input type="text" id="n5">
+<br />
+Top-off Mix %: <input type="text" id="n6">
+<br />
+<input type="button" value="Calculate"
+	onclick = "num1 = parseFloat(document.getElementById('n1').value);
+				num2 = parseFloat(document.getElementById('n2').value);
+				num3 = parseFloat(document.getElementById('n3').value);
+				num4 = parseFloat(document.getElementById('n4').value);
+				num5 = parseFloat(document.getElementById('n5').value);
+				num6 = parseFloat(document.getElementById('n6').value);
+				sum1 = (num2 * (num4 - num6) - num1 * (num3 - num6)) / (num5 - num6);
+				sum2 = (num2 - num1 - sum1);
+				sum3 = (num1 + sum2);
+				out1 = parseFloat( sum1.toPrecision(3) )
+				out2 = parseFloat( sum2.toPrecision(3) )
+				out3 = parseFloat( sum3.toPrecision(3) )
+				document.getElementById('ans').value = out1;
+				document.getElementById('ans2').value = out2;
+				document.getElementById('ans3').value = out3;"
+
+>
+<br />
+<br />
+Fill Mix To Add: <input type="answer" id="ans">
+<br />
+Top-off Mix To Add: <input type="answer" id="ans2">
+<br />
+<br />
+If top-off mix to add is negative, the cylinder must first be drained. If so the cylinder should be drained to the following:
+<br />
+<br />
+Drain Pressure: <input type="answer" id="ans3">
+<br />
+<br />
+This calculator comes with absolutely NO WARRANTY. Use of this calculator is at your own risk. You should have a nitrox blending certification to use this calculator.
+<br />
+<br />
+ALWAYS ANALYSE YOUR CYLINDERS AFTER BLENDING
+</body>
+</html>
