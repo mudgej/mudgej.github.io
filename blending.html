@@ -10,6 +10,9 @@ input { display: table-cell; }
 <body>
 <h1>Nitrox Bank / Compressor Calculator</h1>
 
+<a href="/blendingnotes.html">View notes / known issues etc.</a>
+<br>
+<br>
 Most nitrox calculators assume that the fill mix will always be 100% o2, however this is not the case when using the nitrox compressor or nitrox bank. This calculator is therefore designed to take any percentage of o2 as a fill  mix, for example 34% if using the SSAC banked nitrox. This also allows those who are not qualified gas blenders to use the SSAC 34% nitrox bank to obtain fills such as 32%.
 <br>
 <br>
@@ -61,23 +64,35 @@ In some cases, a cylinder may need to be slightly drained to achieve the desired
 				sum1 = (num2 * (num4 - num6) - num1 * (num3 - num6)) / (num5 - num6);
 				sum2 = (num2 - num1 - sum1);
 				sum3 = (num1 + sum2);
-				out1 = parseFloat( sum1.toPrecision(3) )
-				out2 = parseFloat( sum2.toPrecision(3) )
-				out3 = parseFloat( sum3.toPrecision(3) )
-				document.getElementById(&#39;ans&#39;).value = out1 + num1;
+				out1 = parseFloat( Math.round(sum1) )
+				out2 = parseFloat( Math.round(sum2) )
+				out3 = parseFloat( Math.round(sum3) )
+				document.getElementById(&#39;ans&#39;).value = out1;
+				document.getElementById(&#39;ans1&#39;).value = out1 + num1;
 				document.getElementById(&#39;ans2&#39;).value = out2;
-				document.getElementById(&#39;ans3&#39;).value = out3;">
+				document.getElementById(&#39;ans3&#39;).value = out3;
+				document.getElementById(&#39;ans4&#39;).value = out1 + out2 + num1;">
 	</p>
 	<br>
-  <p>
-    <label for="ans">Add Fill Mix To:</label>
+	<p>
+    <label for="ans">Add</label>
     <input id="ans" type="answer">
-	<label for="n1"> bar</label>
+	<label for="n1"> bar of Fill Mix</label>
   </p>
   <p>
-    <label for="ans2">Top-off Mix To Add:</label>
+    <label for="ans1">(Fill from Start Pressure To &nbsp</label>
+    <input id="ans1" type="answer">
+	<label for="n1"> bar)</label>
+  </p>
+  <p>
+    <label for="ans2">Add</label>
     <input id="ans2" type="answer">
-	<label for="n1"> bar</label>
+	<label for="n1"> bar of Top-off mix</label>
+	<p>
+    <label for="ans4">(Fill to</label>
+    <input id="ans4" type="answer">
+	<label for="n1"> bar)</label>
+  </p>
   </p>
 </form>
 <br>
@@ -100,5 +115,5 @@ This calculator comes with absolutely NO WARRANTY. Use of this calculator is at 
 ALWAYS ANALYSE YOUR CYLINDERS AFTER BLENDING
 <br>
 <br>
-Version 0.1 - 20230419
+Version 0.2 - 20230420
 </body></html>
