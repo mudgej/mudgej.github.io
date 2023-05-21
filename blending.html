@@ -8,18 +8,21 @@ input { display: table-cell; }
 </style>
 </head>
 <body>
-<h1>Nitrox Bank / Compressor Calculator</h1>
+<h1>Nitrox Bank / Compressor Blending Calculator</h1>
 
 <a href="/blendingnotes.html">View notes / known issues etc.</a>
 <br>
 <br>
-Most nitrox calculators assume that the fill mix will always be 100% o2, however this is not the case when using the nitrox compressor or nitrox bank. This calculator is therefore designed to take any percentage of o2 as a fill  mix, for example 34% if using the SSAC banked nitrox. This also allows those who are not qualified gas blenders to use the SSAC 34% nitrox bank to obtain fills such as 32%.
+Most nitrox calculators assume that the fill mix will always be 100% o2, however this is not the case when using the nitrox compressor or nitrox bank. This calculator is therefore designed to take any percentage of o2 as a fill  mix; for example, if using the SSAC banked nitrox, 34%. Top-off mixes usually will be air (20.9%). An example use of this calculator might therefore be wanting a 32% fill using the nitrox bank when your cylinders already have 32% in them and the bank is 34%.
 <br>
 <br>
-Using this method, the maximum FO2 that can be achieved in the final / desired mix is therefore the FO2 of the fill mix gas. Entering a desired mix greater than the fill mix will not stop the calculator from outputting answers, however they of course are not realistic answers as they would require a cylinder to be drained to negative pressure.
+Using this method, the maximum FO2 that can be achieved in the final / desired mix is of course the FO2 of the fill mix gas. Entering a desired mix greater than the fill mix will not stop the calculator from outputting answers, however they of course are not realistic answers. A future update will prevent the inputting of illogical numbers.
 <br>
 <br>
-In some cases, a cylinder may need to be slightly drained to achieve the desired mix. If the top-off mix to add field below gives a negative result, the cylinder must be drained to the specifed pressure BEFORE filling begins.
+In some cases, a cylinder may need to be slightly drained to achieve the desired mix. If the 'top-off mix to add' field below gives a negative result, the cylinder must be drained to the specifed pressure BEFORE filling begins. If the top-off mix to add field is a positive number, the drain pressure field should be ignored. A future update will only display this field if required.
+<br>
+<br>
+Finally, this calculator also allows you to calculate the cost of your fill. Simply enter the size of your cylinders that you are filling below (double it for twinsets, e.g 2x12 = 24) and press the second 'calculate' button.
 <br>
 <br>
 <form>
@@ -44,7 +47,7 @@ In some cases, a cylinder may need to be slightly drained to achieve the desired
 	<label for="n1"> %</label>
   </p>
    <p>
-    <label for="n5">Fill Mix (Nitrox or Bank):</label>
+    <label for="n5">Fill Mix:</label>
     <input id="n5" type="text">
 	<label for="n1"> %</label>
   </p>
@@ -70,8 +73,17 @@ In some cases, a cylinder may need to be slightly drained to achieve the desired
 				document.getElementById(&#39;ans&#39;).value = out1;
 				document.getElementById(&#39;ans1&#39;).value = out1 + num1;
 				document.getElementById(&#39;ans2&#39;).value = out2;
-				document.getElementById(&#39;ans3&#39;).value = out3;
-				document.getElementById(&#39;ans4&#39;).value = out1 + out2 + num1;">
+				if (out2 >= 0) {
+  document.getElementById(&#39;ans3&#39;).value = NaN;
+} else {
+  document.getElementById(&#39;ans3&#39;).value = out3;
+}
+				document.getElementById(&#39;ans4&#39;).value = out1 + out2 + num1;
+				
+				if (n5 >= 100) {
+				document.getElementById(&#39;ans3&#39;).value = NaN;
+				} else {
+				document.getElementById(&#39;ans3&#39;).value = out3;}">
 	</p>
 	<br>
 	<p>
@@ -100,6 +112,7 @@ In some cases, a cylinder may need to be slightly drained to achieve the desired
   If top-off mix to add is negative, the cylinder must first be drained. If so the cylinder should be drained to the following:
 <br>
 <br>
+
 <form>
 <p>
     <label for="ans3">Drain Pressure:</label>
@@ -108,12 +121,52 @@ In some cases, a cylinder may need to be slightly drained to achieve the desired
 </p>
 </form>
 <br>
+<h2>Gas Filling Costs</h2>
+   <p>
+    <label for="n9">Cylinder Size:</label>
+    <input id="n9" type="text">
+	<label for="n1"> L</label>
+  </p>
+<h3>Nitrox Price</h3>
+The prefilled value below is the current SSAC nitrox price as of 28/04/2023. It can be ammended if required.
 <br>
-This calculator comes with absolutely NO WARRANTY. Use of this calculator is at your own risk. You should have a nitrox blending certification to use this calculator.
+<br>
+<form>
+	<p>
+	<label for="n7">Nitrox:</label>
+    <input id="n7" type="answer"  value="0.210">
+	<label for="n1">p / litre</label>
+	</p>
+	<!--
+	<p>
+	<label for="n8">Oxygen:&nbsp</label>
+    <input id="n8" type="answer"  value="1.154">
+	<label for="n1">p / litre</label>
+	</p>
+	-->
+	<br>
+	<input type="button" value="Calculate" onclick="price = parseFloat(document.getElementById(&#39;n7&#39;).value);
+													size = parseFloat(document.getElementById(&#39;n9&#39;).value);
+	final_price=(price/100)*size*out1;
+	final_price = Math.round((final_price + Number.EPSILON) * 100) / 100;
+	document.getElementById(&#39;ans5&#39;).value = final_price;">
+	</p>
+	<br>
+</form>
+<h3>Final Cost for Above Fill</h3>
+<form>
+	<p>
+	<label for="ans5">£</label>
+    <input id="ans5" type="answer">
+	<label for="n1"></label>
+	</p>
+
+</form>
+This calculator comes with absolutely NO WARRANTY. Use of this calculator is at your own risk.
 <br>
 <br>
 ALWAYS ANALYSE YOUR CYLINDERS AFTER BLENDING
 <br>
 <br>
-Version 0.2 - 20230420
+Version 0.3 - 20230522
 </body></html>
