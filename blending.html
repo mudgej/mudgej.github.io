@@ -5,14 +5,25 @@ form  { display: table;      }
 p     { display: table-row;  }
 label { display: table-cell; }
 input { display: table-cell; }
+
+#myDIV {
+  width: 100%;
+  #padding: 50px 0;
+  #text-align: center;
+  background-color: lightgrey;
+  margin-top: 20px;
+  }
 </style>
 </head>
 <body>
 <h1>Nitrox Bank / Compressor Blending Calculator</h1>
+<br>
+<p>Click the "Instructions" button to toggle between hiding and showing the instructions.</p>
+<br>
+<button onclick="myFunction()">Instructions</button>
+<br>
 
-<a href="/blendingnotes.html">View notes / known issues etc.</a>
-<br>
-<br>
+<div id="myDIV" style="display:none">
 Most nitrox calculators assume that the fill mix will always be 100% o2, however this is not the case when using the nitrox compressor or nitrox bank. This calculator is therefore designed to take any percentage of o2 as a fill  mix; for example, if using the SSAC banked nitrox, 34%. Top-off mixes usually will be air (20.9%). An example use of this calculator might therefore be wanting a 32% fill using the nitrox bank when your cylinders already have 32% in them and the bank is 34%.
 <br>
 <br>
@@ -23,6 +34,9 @@ In some cases, a cylinder may need to be slightly drained to achieve the desired
 <br>
 <br>
 Finally, this calculator also allows you to calculate the cost of your fill. Simply enter the size of your cylinders that you are filling below (double it for twinsets, e.g 2x12 = 24) and press the second 'calculate' button.
+</div>
+<br>
+<a href="/blendingnotes.html">View notes / known issues etc.</a>
 <br>
 <br>
 <form>
@@ -168,5 +182,18 @@ This calculator comes with absolutely NO WARRANTY. Use of this calculator is at 
 ALWAYS ANALYSE YOUR CYLINDERS AFTER BLENDING
 <br>
 <br>
-Version 0.3 - 20230522
-</body></html>
+Version 0.4 - 20240610
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>
