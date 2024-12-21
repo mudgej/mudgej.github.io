@@ -1,199 +1,204 @@
-
-<!-- saved from url=(0038)https://mudgej.github.io/blending.html -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>SSAC Gas Calculator</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><style>
-form  { display: table;      }
-p     { display: table-row;  }
-label { display: table-cell; }
-input { display: table-cell; }
-
-#myDIV {
-  width: 100%;
-  #padding: 50px 0;
-  #text-align: center;
-  background-color: lightgrey;
-  margin-top: 20px;
-  }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSAC Gas Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    p {
+      color: #34495e;
+    }
+    form {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    label {
+      font-size: 14px;
+      margin-bottom: 5px;
+      display: block;
+      color: #2c3e50;
+    }
+    input[type="text"],
+    input[type="answer"],
+    input[type="button"] {
+      width: 100%;
+      padding: 8px;
+      margin: 10px 0 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    input[type="button"] {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    input[type="button"]:hover {
+      background-color: #2980b9;
+    }
+    .drain-section {
+      margin-top: 20px;
+      background-color: #f9ebba;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .section-header {
+      margin-top: 40px;
+      font-size: 1.5em;
+      color: #2c3e50;
+    }
+    .warning {
+      color: red;
+      font-weight: bold;
+      font-size: 20px;
+    }
+  </style>
 </head>
 <body>
+
 <h1>Nitrox Bank / Compressor Blending Calculator</h1>
-<br>
-<p>Click the "Instructions" button to toggle between hiding and showing the instructions.</p>
-<br>
-<button onclick="myFunction()">Instructions</button>
+
+<!-- Instructions Toggle Button -->
+<input type="button" value="Instructions" onclick="myFunction()">
 <br>
 
 <div id="myDIV" style="display:none">
-Most nitrox calculators assume that the fill mix will always be 100% O2, however this is not the case when using the nitrox compressor or nitrox bank. This calculator is therefore designed to take any percentage of O2 as a fill  mix; for example, if using the SSAC banked nitrox, ~36%. Top-off mixes usually will be air (20.9%). An example use of this calculator might therefore be wanting a 32% fill using the nitrox bank when your cylinders already have 32% in them and the bank is 36%.
-<br>
-<br>
-Using this method, the maximum FO2 that can be achieved in the final / desired mix is of course the FO2 of the fill mix gas. Entering a desired mix greater than the fill mix will not stop the calculator from outputting answers, however they of course are not realistic answers. A future update will prevent the inputting of illogical numbers.
-<br>
-<br>
-In some cases, a cylinder may need to be slightly drained to achieve the desired mix. If the 'top-off mix to add' field below gives a negative result, the cylinder must be drained to the specifed pressure BEFORE filling begins. If the top-off mix to add field is a positive number, the drain pressure field should be ignored. A future update will only display this field if required.
-<br>
-<br>
-Finally, this calculator also allows you to calculate the cost of your fill. Simply enter the size of your cylinders that you are filling below (double it for twinsets, e.g 2x12 = 24) and press the second 'calculate' button.
+  <p>Most nitrox calculators assume that the fill mix will always be 100% O2, however this is not the case when using the nitrox compressor or nitrox bank. This calculator is therefore designed to take any percentage of O2 as a fill mix; for example, if using the SSAC banked nitrox, ~36%. Top-off mixes usually will be air (20.9%). An example use of this calculator might therefore be wanting a 32% fill using the nitrox bank when your cylinders already have 32% in them and the bank is 36%.</p>
+  <p>Using this method, the maximum FO2 that can be achieved in the final / desired mix is of course the FO2 of the fill mix gas. Entering a desired mix greater than the fill mix will not stop the calculator from outputting answers, however they of course are not realistic answers. A future update will prevent the inputting of illogical numbers.</p>
+  <p>In some cases, a cylinder may need to be slightly drained to achieve the desired mix. If the 'top-off mix to add' field below gives a negative result, the cylinder must be drained to the specified pressure BEFORE filling begins. If the top-off mix to add field is a positive number, the drain pressure field should be ignored. A future update will only display this field if required.</p>
+  <p>Finally, this calculator also allows you to calculate the cost of your fill. Simply enter the size of your cylinders that you are filling below (double it for twinsets, e.g 2x12 = 24) and press the second 'calculate' button.</p>
 </div>
 <br>
-<a href="/blendingnotes.html">View notes / known issues etc.</a>
-<br>
-<br>
-<form>
-  <p>
-    <label for="n1">Start Pressure:</label>
-    <input id="n1" type="text">
-	<label for="n1"> bar</label>
-  </p>
-  <p>
-    <label for="n2">End Pressure:</label>
-    <input id="n2" type="text">
-	<label for="n1"> bar</label>
-  </p>
-   <p>
-    <label for="n3">Start Mix:</label>
-    <input id="n3" type="text">
-	<label for="n1"> %</label>
-  </p>
-   <p>
-    <label for="n4">Desired (End) Mix:</label>
-    <input id="n4" type="text">
-	<label for="n1"> %</label>
-  </p>
-   <p>
-    <label for="n5">Fill Mix:</label>
-    <input id="n5" type="text">
-	<label for="n1"> %</label>
-  </p>
-   <p>
-    <label for="n6">Top-off Mix:</label>
-    <input id="n6" type="text">
-	<label for="n1"> %</label>
-  </p>
-  <p>
-  <br>
-  <input type="button" value="Calculate" onclick="num1 = parseFloat(document.getElementById(&#39;n1&#39;).value);
-				num2 = parseFloat(document.getElementById(&#39;n2&#39;).value);
-				num3 = parseFloat(document.getElementById(&#39;n3&#39;).value);
-				num4 = parseFloat(document.getElementById(&#39;n4&#39;).value);
-				num5 = parseFloat(document.getElementById(&#39;n5&#39;).value);
-				num6 = parseFloat(document.getElementById(&#39;n6&#39;).value);
-				sum1 = (num2 * (num4 - num6) - num1 * (num3 - num6)) / (num5 - num6);
-				sum2 = (num2 - num1 - sum1);
-				sum3 = (num1 + sum2);
-				out1 = parseFloat( Math.round(sum1) )
-				out2 = parseFloat( Math.round(sum2) )
-				out3 = parseFloat( Math.round(sum3) )
-				document.getElementById(&#39;ans&#39;).value = out1;
-				document.getElementById(&#39;ans1&#39;).value = out1 + num1;
-				document.getElementById(&#39;ans2&#39;).value = out2;
-				if (out2 >= 0) {
-  document.getElementById(&#39;ans3&#39;).value = NaN;
-} else {
-  document.getElementById(&#39;ans3&#39;).value = out3;
-}
-				document.getElementById(&#39;ans4&#39;).value = out1 + out2 + num1;
-				
-				if (n5 >= 100) {
-				document.getElementById(&#39;ans3&#39;).value = NaN;
-				} else {
-				document.getElementById(&#39;ans3&#39;).value = out3;}">
-	</p>
-	<br>
-	<p>
-    <label for="ans">Add</label>
-    <input id="ans" type="answer">
-	<label for="n1"> bar of Fill Mix</label>
-  </p>
-  <p>
-    <label for="ans1">(Fill from Start Pressure To &nbsp</label>
-    <input id="ans1" type="answer">
-	<label for="n1"> bar)</label>
-  </p>
-  <p>
-    <label for="ans2">Add</label>
-    <input id="ans2" type="answer">
-	<label for="n1"> bar of Top-off mix</label>
-	<p>
-    <label for="ans4">(Fill to</label>
-    <input id="ans4" type="answer">
-	<label for="n1"> bar)</label>
-  </p>
-  </p>
-</form>
-<br>
-<br>
-  If top-off mix to add is negative, the cylinder must first be drained. If so the cylinder should be drained to the following:
-<br>
-<br>
+
+<!-- Drain warning moved to the top -->
+<p id="drain-message" class="warning" style="display:none;">WARNING: You must drain your cylinder to <span id="drain-pressure-value"></span> bar before filling it. Drain your cylinder and recalcuate.</p>
+<p id="mix-warning" class="warning" style="display:none;">WARNING: Desired (End) Mix cannot be higher than Fill Mix!</p>
 
 <form>
-<p>
-    <label for="ans3">Drain Pressure:</label>
-    <input id="ans3" type="answer">
-	<label for="n1"> bar</label>
-</p>
-</form>
-<br>
-<h2>Gas Filling Costs</h2>
-   <p>
-    <label for="n9">Cylinder Size:</label>
-    <input id="n9" type="text">
-	<label for="n1"> L</label>
-  </p>
-<h3>Nitrox Price</h3>
-The prefilled value below is the current SSAC nitrox price as of 28/04/2023. It can be ammended if required.
-<br>
-<br>
-<form>
-	<p>
-	<label for="n7">Nitrox:</label>
-    <input id="n7" type="answer"  value="0.210">
-	<label for="n1">p / litre</label>
-	</p>
-	<!--
-	<p>
-	<label for="n8">Oxygen:&nbsp</label>
-    <input id="n8" type="answer"  value="1.154">
-	<label for="n1">p / litre</label>
-	</p>
-	-->
-	<br>
-	<input type="button" value="Calculate" onclick="price = parseFloat(document.getElementById(&#39;n7&#39;).value);
-													size = parseFloat(document.getElementById(&#39;n9&#39;).value);
-	final_price=(price/100)*size*out1;
-	final_price = Math.round((final_price + Number.EPSILON) * 100) / 100;
-	document.getElementById(&#39;ans5&#39;).value = final_price;">
-	</p>
-	<br>
-</form>
-<h3>Final Cost for Above Fill</h3>
-<form>
-	<p>
-	<label for="ans5">£</label>
-    <input id="ans5" type="answer">
-	<label for="n1"></label>
-	</p>
+  <label for="n1">Start Pressure (bar):</label>
+  <input id="n1" type="text">
 
+  <label for="n2">End Pressure (bar):</label>
+  <input id="n2" type="text">
+
+  <label for="n3">Start Mix (%):</label>
+  <input id="n3" type="text">
+
+  <label for="n4">Desired (End) Mix (%):</label>
+  <input id="n4" type="text">
+
+  <label for="n5">Fill Mix (%):</label>
+  <input id="n5" type="text">
+
+  <label for="n6">Top-off Mix (%):</label>
+  <input id="n6" type="text">
+
+  <input type="button" value="Calculate" onclick="calculate()">
+
+  <label for="ans">Add:</label>
+  <input id="ans" type="answer" readonly>
+
+  <label for="ans1">(Fill from Start Pressure to):</label>
+  <input id="ans1" type="answer" readonly>
+
+  <label for="ans2">Add (Top-off Mix):</label>
+  <input id="ans2" type="answer" readonly>
+
+  <label for="ans4">(Fill to):</label>
+  <input id="ans4" type="answer" readonly>
 </form>
-This tool comes with absolutely NO WARRANTY. Use of this tool is at your own risk.
-<br>
-<br>
-ALWAYS ANALYSE YOUR CYLINDERS AFTER BLENDING
-<br>
-<br>
-Version 0.4 - 20240610
+
+<div class="section-header">Gas Filling Costs</div>
+
+<form>
+  <label for="n9">Cylinder Size (L):</label>
+  <input id="n9" type="text">
+
+  <label for="n7">Nitrox Price (£/L):</label>
+  <input id="n7" type="text" value="0.210">
+
+  <input type="button" value="Calculate Cost" onclick="calculateCost()">
+
+  <label for="ans5">Final Cost (£):</label>
+  <input id="ans5" type="answer" readonly>
+</form>
+
+<p>This tool comes with absolutely NO WARRANTY. Use of this tool is at your own risk.</p>
+<p>You must be qualified in gas blending operations to use this calculator.</p>
+
+<p>Version 0.41 - 20241221</p>
 
 <script>
-function myFunction() {
-  var x = document.getElementById("myDIV");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
+  function myFunction() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
   }
-}
+
+  function calculate() {
+    let num1 = parseFloat(document.getElementById('n1').value);
+    let num2 = parseFloat(document.getElementById('n2').value);
+    let num3 = parseFloat(document.getElementById('n3').value);
+    let num4 = parseFloat(document.getElementById('n4').value);
+    let num5 = parseFloat(document.getElementById('n5').value);
+    let num6 = parseFloat(document.getElementById('n6').value);
+
+    // Check if Desired (End) Mix is higher than Fill Mix
+    if (num4 > num5) {
+      document.getElementById('mix-warning').style.display = 'block';
+      return; // Stop the calculation if the mix is invalid
+    } else {
+      document.getElementById('mix-warning').style.display = 'none';
+    }
+
+    // Add logic to calculate gas quantities and fill pressures
+    let sum1 = (num2 * (num4 - num6) - num1 * (num3 - num6)) / (num5 - num6);
+    let sum2 = (num2 - num1 - sum1);
+    let sum3 = (num1 + sum2);
+
+    // Display results rounded to 1 decimal place
+    document.getElementById('ans').value = sum1.toFixed(1);
+    document.getElementById('ans1').value = (sum1 + num1).toFixed(1);
+    document.getElementById('ans2').value = sum2.toFixed(1);
+    document.getElementById('ans4').value = (sum1 + sum2 + num1).toFixed(1);
+
+    // Handle drain pressure if needed
+    if (sum2 < 0) {
+      let drainPressure = (num1 + sum2).toFixed(1);
+      document.getElementById('drain-message').style.display = 'block';
+      document.getElementById('drain-pressure-value').textContent = drainPressure;
+    } else {
+      document.getElementById('drain-message').style.display = 'none';
+    }
+  }
+
+  function calculateCost() {
+    let price = parseFloat(document.getElementById('n7').value);
+    let size = parseFloat(document.getElementById('n9').value);
+    let finalCost = (price / 100) * size * parseFloat(document.getElementById('ans').value);
+    finalCost = finalCost.toFixed(1);
+    document.getElementById('ans5').value = finalCost;
+  }
 </script>
 
 </body>
 </html>
+
