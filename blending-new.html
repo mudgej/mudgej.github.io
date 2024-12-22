@@ -56,29 +56,42 @@
       font-size: 20px;
     }
   </style>
+  <link rel="manifest" href="/manifest.json">
 </head>
 <body>
 
 <h1>Nitrox Bank / Compressor Blending Tool</h1>
 
+<!-- Instructions Toggle Button -->
+<input type="button" value="Instructions" onclick="myFunction()">
+<br>
+
+<div id="myDIV" style="display:none">
+  <p>Most nitrox calculators assume that the fill mix will always be 100% O2, however this is not the case when using a nitrox compressor or nitrox bank. This calculator is therefore designed to take any percentage of O2 as a fill mix. Top-off mixes usually will be air (20.9%). An example use of this calculator might therefore be wanting a 32% fill using a nitrox bank when your cylinders already have 32% in them and the bank is 38%.</p>
+  <p>Using this method, the maximum % that can be achieved in the final / desired mix is of course the % of the fill mix gas.</p>
+  <p>In some cases, a cylinder may need to be slightly drained to achieve the desired mix. The calculator will warn you if this is the case.</p>
+  <p>Finally, this calculator also allows you to calculate the cost of your fill. Simply enter the total size of your cylinders that you are filling below and press the second 'calculate' button.</p>
+</div>
+<br>
+
 <form>
   <label for="n1">Start Pressure (bar):</label>
-  <input id="n1" type="text" inputmode="numeric">
+  <input id="n1" type="text" inputmode="decimal">
 
   <label for="n2">End Pressure (bar):</label>
-  <input id="n2" type="text" inputmode="numeric">
+  <input id="n2" type="text" inputmode="decimal">
 
   <label for="n3">Start Mix (%):</label>
-  <input id="n3" type="text" inputmode="numeric">
+  <input id="n3" type="text" inputmode="decimal">
 
   <label for="n4">Desired (End) Mix (%):</label>
-  <input id="n4" type="text" inputmode="numeric">
+  <input id="n4" type="text" inputmode="decimal">
 
   <label for="n5">Fill (Bank or Compressor) Mix (%):</label>
-  <input id="n5" type="text" inputmode="numeric">
+  <input id="n5" type="text" inputmode="decimal">
 
   <label for="n6">Top-off Mix (%):</label>
-  <input id="n6" type="text" value="20.9" inputmode="numeric">
+  <input id="n6" type="text" value="20.9" inputmode="decimal">
 
   <input type="button" value="Calculate" onclick="calculate()">
   
@@ -104,10 +117,10 @@
 <p> The pre-filled value below is the SSAC nitrox price as of 28/04/2023. It can be amended if required.</p>
 <form>
   <label for="n9">Cylinder Size (L):</label>
-  <input id="n9" type="text" inputmode="numeric">
+  <input id="n9" type="text" inputmode="decimal">
 
   <label for="n7">Nitrox Price (p/L):</label>
-  <input id="n7" type="text" value="0.210" inputmode="numeric">
+  <input id="n7" type="text" value="0.210" inputmode="decimal">
 
   <input type="button" value="Calculate Cost" onclick="calculateCost()">
 
@@ -121,6 +134,26 @@
 <p>Version 0.41 - 20241221</p>
 
 <script>
+
+  function myFunction() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+  
+  if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+      console.log('Service Worker registered with scope:', registration.scope);
+    }).catch(function(error) {
+      console.log('Service Worker registration failed:', error);
+    });
+  });
+}
+  
   let out1 = 0; // Global variable for gas amount added
 
   function calculate() {
