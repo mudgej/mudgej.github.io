@@ -1,8 +1,8 @@
 {
   "name": "Nitrox Blending Calculator",
   "short_name": "Nitrox Calculator",
-  "description": "A tool for blending nitrox gas mixtures and calculating costs.",
-  "start_url": "/",
+  "description": "A tool for blending nitrox gas mixtures using nitrox banks and nitrox compressors and calculating costs.",
+  "start_url": "/blending-new.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#3498db",
