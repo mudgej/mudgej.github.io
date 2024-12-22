@@ -135,16 +135,7 @@
 
 <script>
 
-  function myFunction() {
-    var x = document.getElementById("myDIV");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-  }
-  
-  if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
     navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
       console.log('Service Worker registered with scope:', registration.scope);
@@ -153,8 +144,16 @@
     });
   });
 }
-  
-  let out1 = 0; // Global variable for gas amount added
+
+
+  function myFunction() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
 
   function calculate() {
     let num1 = parseFloat(document.getElementById('n1').value);
@@ -166,7 +165,7 @@
 
     let showWarning = false;
 
-    // Validation checks
+    // Check if any mix value exceeds 100
     if (num3 > 100 || num4 > 100 || num5 > 100 || num6 > 100) {
       document.getElementById('mix-over-100-warning').style.display = 'block';
       showWarning = true;
@@ -174,6 +173,7 @@
       document.getElementById('mix-over-100-warning').style.display = 'none';
     }
 
+    // Check if Start Pressure is lower than End Pressure
     if (num1 >= num2) {
       document.getElementById('pressure-warning').style.display = 'block';
       showWarning = true;
@@ -181,6 +181,7 @@
       document.getElementById('pressure-warning').style.display = 'none';
     }
 
+    // Check if Desired (End) Mix is higher than Fill Mix
     if (num4 > num5) {
       document.getElementById('mix-warning').style.display = 'block';
       showWarning = true;
@@ -189,29 +190,53 @@
     }
 
     if (showWarning) {
-      return;
+      document.getElementById('drain-message').style.display = 'none';
+      document.getElementById('ans').value = '';
+      document.getElementById('ans1').value = '';
+      document.getElementById('ans2').value = '';
+      document.getElementById('ans4').value = '';
+      return; // Stop calculation if there's any warning
     }
 
-    // Gas calculation
-    out1 = (num2 * (num4 - num6) - num1 * (num3 - num6)) / (num5 - num6);
-    let sum2 = (num2 - num1 - out1).toFixed(1);
+    // Add logic to calculate gas quantities and fill pressures
+    let sum1 = (num2 * (num4 - num6) - num1 * (num3 - num6)) / (num5 - num6);
+    let sum2 = (num2 - num1 - sum1);
+    sum2 = sum2.toFixed(1); // Convert sum2 to 1 decimal place
+    let sum3 = (num1 + parseFloat(sum2));
 
-    document.getElementById('ans').value = out1.toFixed(1);
-    document.getElementById('ans1').value = (out1 + num1).toFixed(1);
-    document.getElementById('ans2').value = sum2;
-    document.getElementById('ans4').value = (out1 + parseFloat(sum2) + num1).toFixed(1);
+    // Handle drain pressure only if sum2 is less than 0
+    if (parseFloat(sum2) < 0) {
+      let drainPressure = (num1 + parseFloat(sum2)).toFixed(1);
+      document.getElementById('drain-message').style.display = 'block';
+      document.getElementById('drain-pressure-value').textContent = drainPressure;
+
+      // Hide output data when drain pressure warning is displayed
+      document.getElementById('ans').value = '';
+      document.getElementById('ans1').value = '';
+      document.getElementById('ans2').value = '';
+      document.getElementById('ans4').value = '';
+    } else {
+      document.getElementById('drain-message').style.display = 'none';
+
+      // Display results rounded to 1 decimal place
+      document.getElementById('ans').value = sum1.toFixed(1);
+      document.getElementById('ans1').value = (sum1 + num1).toFixed(1);
+      document.getElementById('ans2').value = sum2;
+      document.getElementById('ans4').value = (sum1 + parseFloat(sum2) + num1).toFixed(1);
+    }
   }
-
+  
   function calculateCost() {
     let price = parseFloat(document.getElementById('n7').value);
     let size = parseFloat(document.getElementById('n9').value);
+    let filltotal = parseFloat(document.getElementById('ans').value);
 
-    if (isNaN(price) || isNaN(size) || isNaN(out1)) {
+    if (isNaN(price) || isNaN(size) || isNaN(filltotal)) {
       alert("Ensure all inputs are correctly filled and gas amount is calculated first.");
       return;
     }
 
-    let finalPrice = (price / 100) * size * out1;
+    let finalPrice = (price / 100) * size * filltotal;
     finalPrice = Math.round((finalPrice + Number.EPSILON) * 100) / 100;
 
     document.getElementById('ans5').value = finalPrice;
