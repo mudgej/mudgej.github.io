@@ -3,7 +3,7 @@ self.addEventListener('install', function(event) {
     caches.open('nitrox-cache').then(function(cache) {
       return cache.addAll([
         '/',
-        '/index.html',
+        '/blending-new.html',
         '/manifest.json',
         '/icons/icon-192x192.png',
         '/icons/icon-512x512.png',
