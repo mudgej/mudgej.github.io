@@ -1,12 +1,69 @@
-﻿<html>
-<head><title>mudge.uk</title></head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>James Mudge</title>
+  <style>
+    body {
+      background-color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      text-align: center;
+    }
+    .name {
+      font-size: 2em;
+      font-weight: bold;
+    }
+    .contact {
+      margin-top: 0.5em;
+      font-size: 1em;
+    }
+    .social {
+      margin-top: 1em;
+      font-size: 0.95em;
+    }
+    .social a {
+      text-decoration: none;
+      color: #000;
+      margin: 0 0.5em;
+    }
+    .social a:hover {
+      text-decoration: underline;
+    }
+    .contact-info {
+      font-size: 0.7em;
+      margin-top: 5px;
+    }
+  </style>
+</head>
 <body>
-<h1>mudge.uk</h1>
-<br />
-<br />
-<a href="/blending">Experimental Blending Calculator</a>
-<br />
-<a href="/map">Dive Site Map</a>
+  <div class="card">
+    <div class="name">James Mudge</div>
+    <div class="contact" id="contact"></div>
+        <div class="contact-info">[WhatsApp | Signal]</div>
+    <div class="social">
+      <a href="https://linkedin.com/in/mudgej" target="_blank">LinkedIn</a>
+      <a href="https://github.com/mudgej" target="_blank">GitHub</a>
+      <a href="https://instagram.com/hotchocolatemudgecake" target="_blank">Instagram</a>
+    </div>
+
+  </div>
+
+  <script>
+    const user = "james";
+    const domain = "mudge.uk";
+    const phone = "+44 " + "7753" + " 186761";
+
+    const email = `${user}@${domain}`;
+    const mailtoLink = `<a href="mailto:${email}">${email}</a>`;
+
+    document.getElementById("contact").innerHTML = `${mailtoLink}<br>${phone}`;
+  </script>
 </body>
 </html>
