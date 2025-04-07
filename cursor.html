@@ -4,50 +4,52 @@
   <meta charset="UTF-8">
   <title>Typing Effect with Blinking Cursor</title>
   <style>
-    body {
-      background-color: black;
-      color: white;
-      margin: 0;
-      height: 100dvh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Courier New', monospace;
-    }
+ body {
+  background-color: black;
+  color: white;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Courier New', monospace;
+}
 
-    .typewriter-container {
-      width: 80%;
-      padding: 20%;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-      overflow-y: auto;
-    }
+.typewriter-container {
+  width: 90%;
+  max-width: 800px;
+  max-height: 80vh;
+  padding: 20px;
+  box-sizing: border-box;
+  display: block;
+  overflow-y: auto;
+  position: relative;
+}
 
-    .typewriter-text {
-      font-size: 1.2rem;
-      white-space: normal;
-      word-break: break-word;
-      text-align: left;
-      line-height: 1.5;
-    }
+.typewriter-text {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  white-space: normal;
+  word-break: break-word;
+  text-align: left;
+  line-height: 1.5;
+}
 
-    .cursor {
-      display: inline-block;
-      width: 0.6em;
-      height: 1.2em;
-      background-color: white;
-      animation: blink 1s step-end infinite;
-      vertical-align: bottom;
-    }
 
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-  </style>
+  .cursor {
+    display: inline-block;
+    width: 0.6em;
+    height: 1.2em;
+    background-color: white;
+    animation: blink 1s step-end infinite;
+    vertical-align: bottom;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+</style>
+
 </head>
 <body>
   <div class="typewriter-container">
