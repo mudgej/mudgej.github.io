@@ -1,62 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>James Mudge</title>
   <style>
     body {
       background-color: black;
-      font-family: Arial, sans-serif;
+      color: white;
+      margin: 0;
+      height: 100dvh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100dvh;
-      margin: 0;
+      font-family: 'Courier New', monospace;
     }
-    .card {
-      text-align: center;
+
+    .typewriter-container {
+      width: 90%;
+      max-width: 800px;
+      max-height: 80vh;
+      padding: 20px;
+      box-sizing: border-box;
+      display: block;
+      overflow-y: auto;
+      position: relative;
     }
-    .name {
-      font-size: 2em;
-      font-weight: bold;
-      color: #ffffff;
+
+    .typewriter-text {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      white-space: normal;
+      word-break: break-word;
+      text-align: left;
+      line-height: 1.5;
+      margin-left:-4px;
     }
-    .contact {
-      margin-top: 0.5em;
-      font-size: 1em;
-      color: #ffffff;
+
+    .cursor {
+      display: inline-block;
+      width: 0.6em;
+      height: 1.2em;
+      background-color: white;
+      animation: blink 1s step-end infinite;
+      vertical-align: bottom;
     }
-    .social {
-      margin-top: 1em;
-      font-size: 0.95em;
-      color: #ffffff;
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
-    .social a {
-      text-decoration: none;
-      color: #ffffff;
-      margin: 0 0.5em;
-    }
-    .social a:hover {
-      text-decoration: underline;
-      color: #ffffff;
-    }
-    .contact-info {
-      font-size: 0.7em;
-      margin-top: 5px;
-      color: #ffffff;
-    }
+
+a {
+  color: white;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  vertical-align: baseline;
+  background-color: transparent;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #ff6666;
+}
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="name">James Mudge</div>
-    <div class="social">
-      <a href="https://linkedin.com/in/mudgej" target="_blank">LinkedIn</a>
-      <a href="https://github.com/mudgej" target="_blank">GitHub</a>
-      <a href="https://instagram.com/hotchocolatemudgecake" target="_blank">Instagram</a>
+  <div class="typewriter-container">
+    <div class="typewriter-text" id="typewriter">
+      <span id="typed-content"></span><span class="cursor" id="cursor"></span>
     </div>
-
   </div>
 
-</body>
-</html>
+  <script>
+  const text1 = "Hi, I'm James.";
+  const text2 = "Welcome to my website. If you would like to get in touch, you can contact me on LinkedIn, view my GitHub, or follow me on Instagram.";
+  const text3 = "So, what's next?";
+  const speed = 55;
+  const pauseBetween = 1000;
+
+  const typedContent = document.getElementById('typed-content');
+  const cursor = document.getElementById('cursor');
+
+  let i = 0;
+
+  function typeText(text, callback) {
+    if (i < text.length) {
+      typedContent.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(() => typeText(text, callback), speed);
+    } else if (callback) {
+      callback();
+    }
+  }
+
+  function highlightLinks() {
+    const linksHTML = `
+      <a href="https://linkedin.com/in/mudgej" target="_blank" class="highlight">LinkedIn</a>, view my
+      <a href="https://github.com/mudgej" target="_blank" class="highlight">GitHub</a>, or follow me on
+      <a href="https://instagram.com/hotchocolatemudgecake" target="_blank" class="highlight">Instagram</a>.
+    `;
+    typedContent.innerHTML = typedContent.innerHTML.replace(
+      "LinkedIn, view my GitHub, or follow me on Instagram.",
+      linksHTML
+    );
+  }
+
+  // Start the typing animation
+  typeText(text1, () => {
+    setTimeout(() => {
+      typedContent.innerHTML += "<br><br>";
+      i = 0;
+      typeText(text2, () => {
+        setTimeout(() => {
+          typedContent.innerHTML += "<br><br>";
+          i = 0;
+          typeText(text3, () => {
+            setTimeout(() => {
+              highlightLinks();
+            }, pauseBetween);
+          });
+        }, pauseBetween);
+      });
+    }, pauseBetween);
+  });
+</script>
