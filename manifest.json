@@ -4,7 +4,7 @@
   "description": "A tool for blending nitrox gas mixtures using nitrox banks and nitrox compressors and calculating costs.",
   "start_url": "/blending.html",
   "display": "standalone",
-  "background_color": "#fffefff",
+  "background_color": "#ffffff",
   "theme_color": "#3498db",
   "icons": [
     {
