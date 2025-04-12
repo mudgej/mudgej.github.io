@@ -1,31 +1,29 @@
-const CACHE_NAME = 'blending-cache-v1';
+const CACHE_NAME = 'blending-cache-v1.1';
+const OFFLINE_URL = '/blending.html';
 const URLS_TO_CACHE = [
-  '/blending.html',
+  OFFLINE_URL,
   '/manifest.json',
   '/icons/icon-192x192.png',
   '/icons/icon-512x512.png',
-  // Add more assets if needed
 ];
 
-// Install event
+// Install and cache assets
 self.addEventListener('install', event => {
   self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(URLS_TO_CACHE);
-    })
+    caches.open(CACHE_NAME).then(cache => cache.addAll(URLS_TO_CACHE))
   );
 });
 
-// Activate event
+// Activate and clean old caches
 self.addEventListener('activate', event => {
   clients.claim();
   event.waitUntil(
-    caches.keys().then(cacheNames =>
+    caches.keys().then(keys =>
       Promise.all(
-        cacheNames.map(name => {
-          if (name !== CACHE_NAME) {
-            return caches.delete(name);
+        keys.map(key => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
           }
         })
       )
@@ -33,46 +31,40 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Fetch event
+// Fetch handler
 self.addEventListener('fetch', event => {
-  // Handle navigation (e.g., PWA startup or refreshing page)
+  // Handle navigations (e.g., home screen launch or address bar visit)
   if (event.request.mode === 'navigate') {
     event.respondWith(
-      fetch(event.request)
-        .then(response => response)
-        .catch(() => caches.match('/blending.html'))
+      fetch(event.request).catch(() => {
+        return caches.match(OFFLINE_URL);
+      })
     );
     return;
   }
 
-  // Handle static assets and API calls
+  // For other requests (e.g., images, icons, styles)
   event.respondWith(
-    caches.match(event.request).then(cachedResponse => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-
-      return fetch(event.request)
-        .then(networkResponse => {
-          // Clone response before using it
-          const responseClone = networkResponse.clone();
-
-          // Only cache successful basic (same-origin) responses
-          if (
-            networkResponse.status === 200 &&
-            networkResponse.type === 'basic'
-          ) {
-            caches.open(CACHE_NAME).then(cache => {
-              cache.put(event.request, responseClone);
-            });
-          }
-
-          return networkResponse;
-        })
-        .catch(() => {
-          // Optional: fallback for assets (e.g., offline.svg)
-          return;
-        });
+    caches.match(event.request).then(cached => {
+      return (
+        cached ||
+        fetch(event.request)
+          .then(response => {
+            if (
+              response.status === 200 &&
+              response.type === 'basic'
+            ) {
+              const cloned = response.clone();
+              caches.open(CACHE_NAME).then(cache => {
+                cache.put(event.request, cloned);
+              });
+            }
+            return response;
+          })
+          .catch(() => {
+            // Optional: fallback for images/scripts/etc.
+          })
+      );
     })
   );
 });
