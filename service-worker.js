@@ -1,4 +1,4 @@
-const CACHE_NAME = 'blending-cache-v1.2';
+const CACHE_NAME = 'blending-cache-v1.21';
 const OFFLINE_URL = 'https://www.mudge.uk/blending.html';
 const URLS_TO_CACHE = [
   OFFLINE_URL,
