@@ -5,7 +5,7 @@ const URLS_TO_CACHE = [
   '/manifest.json',
   '/icons/icon-192x192.png',
   '/icons/icon-512x512.png',
-  '/icons/icon-1024x1024.png',
+  '/icons/icon-1024x1024.png'
 ];
 
 // Install and cache assets
