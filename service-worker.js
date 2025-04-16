@@ -1,8 +1,9 @@
-const CACHE_NAME = 'blending-cache-v1.4';
+const CACHE_NAME = 'blending-cache-v1.5';
 const OFFLINE_URL = '/blending.html';
 const URLS_TO_CACHE = [
   OFFLINE_URL,
   '/manifest.json',
+  '/service-worker.js',
   '/icons/icon-192x192.png',
   '/icons/icon-512x512.png',
   '/icons/icon-1024x1024.png'
