@@ -1,5 +1,5 @@
 const CACHE_NAME = 'blending-cache-v1.3';
-const OFFLINE_URL = 'https://www.mudge.uk/blending.html';
+const OFFLINE_URL = '/blending.html';
 const URLS_TO_CACHE = [
   OFFLINE_URL,
   '/manifest.json',
