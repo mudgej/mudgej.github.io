@@ -2,7 +2,7 @@
   "name": "Nitrox Blending Calculator",
   "short_name": "Blender",
   "description": "A tool for blending nitrox gas mixtures using nitrox banks and nitrox compressors and calculating costs.",
-  "start_url": "/blending.html",
+  "start_url": "https://www.mudge.uk/blending.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#3498db",
@@ -16,6 +16,12 @@
     {
       "src": "icons/icon-512x512.png",
       "sizes": "512x512",
+      "type": "image/png"
+    }
+
+    {
+      "src": "icons/icon-1024x1024.png",
+      "sizes": "1024x1024",
       "type": "image/png"
     }
   ]

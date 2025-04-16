@@ -1,10 +1,11 @@
-const CACHE_NAME = 'blending-cache-v1.1';
-const OFFLINE_URL = '/blending.html';
+const CACHE_NAME = 'blending-cache-v1.2';
+const OFFLINE_URL = 'https://www.mudge.uk/blending.html';
 const URLS_TO_CACHE = [
   OFFLINE_URL,
   '/manifest.json',
   '/icons/icon-192x192.png',
-  '/icons/icon-512x512.png',
+  '/icons/icon-512x512.png'
+  '/icons/icon-1024x1024.png',
 ];
 
 // Install and cache assets
