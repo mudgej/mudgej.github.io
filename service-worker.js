@@ -4,7 +4,7 @@ const URLS_TO_CACHE = [
   OFFLINE_URL,
   '/manifest.json',
   '/icons/icon-192x192.png',
-  '/icons/icon-512x512.png'
+  '/icons/icon-512x512.png',
   '/icons/icon-1024x1024.png',
 ];
 
