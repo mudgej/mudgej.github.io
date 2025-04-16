@@ -1,4 +1,4 @@
-const CACHE_NAME = 'blending-cache-v1.3';
+const CACHE_NAME = 'blending-cache-v1.4';
 const OFFLINE_URL = '/blending.html';
 const URLS_TO_CACHE = [
   OFFLINE_URL,
