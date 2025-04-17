@@ -1,5 +1,5 @@
 const CACHE_NAME = 'blending-cache-v1.5';
-const OFFLINE_URL = '/blending.html';
+const OFFLINE_URL = '/blending';
 const URLS_TO_CACHE = [
   OFFLINE_URL,
   '/manifest.json',
